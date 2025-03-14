@@ -122,20 +122,30 @@
   ],
   "skills": [
     {
-      "name": "My First Skill",
+      "name": "SaaS Strategy & Operations",
       "proficiency": 100,
       "proficiency_label": "Proficiency Level"
     },
     {
-      "name": "My Second Skill",
-      "proficiency": 80,
+      "name": "Data-Driven Decision Making",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Technical Problem-Solving & Process Optimization",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Data Analysis & Insights",
+      "proficiency": 95,
       "proficiency_label": "Proficiency Level"
     }
   ],
   "interests": [
     {
-      "name": "My First Hobby",
-      "summary": "Short summary about my first Hobby",
+      "name": "Technology & AI Experimentation",
+      "summary": "Enthusiastic about emerging tech, always testing AI tools, automation frameworks, and new SaaS innovations",
       "images": [
         {
           "img_path": "https://picsum.photos/600/338?random=7",
@@ -148,8 +158,8 @@
       ]
     },
     {
-      "name": "My Second Hobby",
-      "summary": "Short summary about my second hobby",
+      "name": "Hiking & Outdoor Exploration",
+      "summary": "Passionate about exploring nature, whether it's tackling scenic trails in Colorado or discovering new landscapes",
       "images": [
         {
           "img_path": "https://picsum.photos/600/338?random=9",

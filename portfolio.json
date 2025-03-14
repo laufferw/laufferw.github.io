@@ -1,38 +1,38 @@
 {
   "name": "William Lloyd Lauffer",
-  "label": "Optional Label",
-  "image_path": "img/default-image.png",
+  "label": "SaaS Problem-Solver",
+  "image_path": "img/william.svg",
   "contact": {
-    "email": "FirstLast@Sample.com",
-    "phone": "123-456-7890",
-    "location": "City, State, Country"
+    "email": "laufferw@gmail.com",
+    "phone": "352-231-9462",
+    "location": "Denver, Colorado, US"
   },
-  "summary": "A short summary of who you are, your background, experience, and interests to give visitors a quick introduction to you.",
+  "summary": "I’m a SaaS professional with a passion for solving complex problems, optimizing processes, and driving growth. With a background that spans Revenue Operations, Customer Success, and Sales Engineering, I thrive in fast-paced startup environments where I can wear multiple hats and make an impact.",
   "base_url": "127.0.0.1:5500",
   "social_links": [
     {
       "label": "Personal Website",
-      "url": "https://sample.com",
+      "url": "https://williamlauffer.org",
       "svg_path": "img/globe.svg"
     },
     {
-      "label": "First Social",
-      "url": "https://sample.com",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/william-lloyd-lauffer/",
       "svg_path": "img/linkedin.svg"
     },
     {
-      "label": "Second Social",
-      "url": "https://sample.com",
+      "label": "Github",
+      "url": "https://github.com/laufferw",
       "svg_path": "img/github.svg"
     }
   ],
   "work_experience": [
     {
-      "company": "Latest Job",
-      "position": "Position One",
-      "url": "https://sample.com",
-      "start_date": "01/01/2020",
-      "end_date": "Present",
+      "company": "Postman",
+      "position": "CS Enablement Manager",
+      "url": "https://postman.com",
+      "start_date": "01/01/2022",
+      "end_date": "01/07/2025",
       "summary": "Short summary about present job and what the position entails",
       "highlights": [
         "First Duty of Current Job",
@@ -41,11 +41,11 @@
       ]
     },
     {
-      "company": "Previous Job",
-      "position": "Position Two",
-      "url": "https://sample.com",
-      "start_date": "01/01/2010",
-      "end_date": "01/01/2020",
+      "company": "JumpCloud",
+      "position": "Senior Customer Success Manager",
+      "url": "https://jumpcloud.com",
+      "start_date": "05/21/2021",
+      "end_date": "12/31/2021",
       "summary": "Short summary about previous job and what that position entailed",
       "highlights": [
         "First Duty of Previous Job",

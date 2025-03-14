@@ -134,27 +134,20 @@
   ],
   "education": [
     {
-      "institution": "Institution One",
-      "location": "Institution One Location",
-      "url": "https://sample.com",
+      "institution": "University of Florida",
+      "location": "Gainesville, FL",
+      "url": "https://www.ufl.edu/",
       "degrees": [
-        "Master of Science in Computer Science",
-        "Minor in Mathematics"
+        "Master of Arts in Health Education and Behavior"
       ],
-      "honors": ["Outstanding Student Award", "Dean's List"],
-      "gpa_cumulative": "3.5",
-      "gpa_major": "4.0",
-      "graduation_date": "01/01/2005"
+      "graduation_date": "12/2010"
     },
     {
-      "institution": "Institution Two",
-      "location": "Institution Two Location",
-      "url": "https://sample.com",
-      "degrees": ["Bachelor of Science in Physics"],
-      "honors": ["Scholarship Recipient"],
-      "gpa_cumulative": "3.2",
-      "gpa_major": "3.9",
-      "graduation_date": "01/01/2000"
+      "institution": "IUniversity of Florida",
+      "location": "Gainesville, FL",
+      "url": "https://www.ufl.edu/",
+      "degrees": ["Bachelor of Arts in History"],
+      "graduation_date": "12/2006"
     }
   ],
   "skills": [
@@ -205,20 +198,13 @@
       "fluency": "Native speaker"
     },
     {
-      "language": "American Sign Language",
-      "fluency": "Professional Working Proficiency"
+      "language": "French",
+      "fluency": "Navigate in Country Proficiency"
     }
-  ],
-  "references": [
+    ,
     {
-      "name": "Person One",
-      "relation": "Previous Boss",
-      "reference": "Some nice things that Person One said about you, your work ethic, and how you provided value to their team."
-    },
-    {
-      "name": "Person Two",
-      "relation": "Previous Coworker",
-      "reference": "More kind things that Person Two said about you, what it was like working with you, and things you've accomplished."
+      "language": "Spanish",
+      "fluency": "Basic Proficiency"
     }
   ]
 }

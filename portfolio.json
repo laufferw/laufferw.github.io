@@ -137,16 +137,14 @@
       "institution": "University of Florida",
       "location": "Gainesville, FL",
       "url": "https://www.ufl.edu/",
-      "degrees": [
-        "Master of Arts in Health Education and Behavior"
-      ],
+      "degree": "M.A. in Health Education and Behavior",
       "graduation_date": "12/2010"
     },
     {
-      "institution": "IUniversity of Florida",
+      "institution": "University of Florida",
       "location": "Gainesville, FL",
       "url": "https://www.ufl.edu/",
-      "degrees": ["Bachelor of Arts in History"],
+      "degree": "B.A. in History",
       "graduation_date": "12/2006"
     }
   ],

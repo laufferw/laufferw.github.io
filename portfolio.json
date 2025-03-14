@@ -56,8 +56,8 @@
   ],
   "projects": [
     {
-      "title": "My First Project",
-      "summary": "Short summary about my first project",
+      "title": "forHumanity",
+      "summary": "A simple app to provide a blanket for those in need.",
       "url": "https://sample.com",
       "highlights": [
         "First Highlight of Project One",
@@ -80,8 +80,8 @@
       ]
     },
     {
-      "title": "My Second Project",
-      "summary": "Short summary about my second project",
+      "title": "Flappy Square",
+      "summary": "Flappy Square in Godot, beware the sound level!!",
       "url": "https://sample.com",
       "highlights": [
         "First Highlight of Project Two",
@@ -148,11 +148,11 @@
       "summary": "Enthusiastic about emerging tech, always testing AI tools, automation frameworks, and new SaaS innovations",
       "images": [
         {
-          "img_path": "https://picsum.photos/600/338?random=7",
+          "img_path": "img/technology_experimentation_1.svg",
           "caption": "Image Caption 7"
         },
         {
-          "img_path": "https://picsum.photos/600/338?random=8",
+          "img_path": "img/technology_experimentation_2.svg",
           "caption": "Image Caption 8"
         }
       ]
@@ -162,11 +162,11 @@
       "summary": "Passionate about exploring nature, whether it's tackling scenic trails in Colorado or discovering new landscapes",
       "images": [
         {
-          "img_path": "https://picsum.photos/600/338?random=9",
+          "img_path": "img/Hiking_Mountain_Landscape.svg",
           "caption": "Image Caption 9"
         },
         {
-          "img_path": "https://picsum.photos/600/338?random=10",
+          "img_path": "img/Hiking_Trail_Exploration.svg",
           "caption": "Image Caption 10"
         }
       ]

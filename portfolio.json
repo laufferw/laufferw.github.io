@@ -273,57 +273,47 @@
   "interests": [
     {
       "name": "Building AI Agents",
-      "summary": "Building AI Agents",
+      "summary": "I love buidling little agents that handle simple everyday tasks",
       "images": []
     },
     {
       "name": "Python",
-      "summary": "Python",
+      "summary": "Learning python to get better at building my agents :)",
       "images": []
     },
     {
       "name": "Harvard Online Courses",
-      "summary": "Harvard Online Courses",
+      "summary": "I have found that these courses have been an amazing way to expand myself",
       "images": []
     },
     {
       "name": "Movies",
-      "summary": "Movies",
+      "summary": "Who doesn't love a good movie?",
       "images": []
     },
     {
       "name": "Reading",
-      "summary": "Reading",
-      "images": []
-    },
-    {
-      "name": "Blogging",
-      "summary": "Blogging",
+      "summary": "Talk to me about Royal Road",
       "images": []
     },
     {
       "name": "Traveling",
-      "summary": "Traveling",
+      "summary": "Love to see and experience new places and things",
       "images": []
     },
     {
       "name": "Weightlifting",
-      "summary": "Weightlifting",
+      "summary": "Half of longevity is being able to move with confidence",
       "images": []
     },
     {
       "name": "Running",
-      "summary": "Running",
-      "images": []
-    },
-    {
-      "name": "Observational Writing",
-      "summary": "Observational Writing",
+      "summary": "The other half of longevity is having the motor to that can drive you",
       "images": []
     },
     {
       "name": "Mindfulness",
-      "summary": "Mindfulness",
+      "summary": "Don't let you mind control you",
       "images": []
     }
   ],

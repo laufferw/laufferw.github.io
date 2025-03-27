@@ -29,28 +29,80 @@
   "work_experience": [
     {
       "company": "Postman",
-      "position": "CS Enablement Manager",
+      "position": "Customer Success Enablement Manager",
       "url": "https://postman.com",
       "start_date": "01/01/2022",
       "end_date": "01/07/2025",
-      "summary": "Short summary about present job and what the position entails",
+      "summary": "Led onsite QBRs for GTM teams, aligning sales, customer success, and enablement on customer adoption trends and initiatives.",
       "highlights": [
-        "First Duty of Current Job",
-        "Second Duty of Current Job",
-        "Third Duty of Current Job"
+        "Analyzed customer health metrics to identify intervention needs, collaborating with GTM teams to mitigate churn and drive expansion.",
+        "Owned enablement programs, ensuring GTM teams had the necessary resources and knowledge to effectively drive customer engagement and expansion.",
+        "Designed onboarding frameworks to expedite time-to-value, serving as an SME to improve customer ramp-up processes.",
+        "Refined customer segmentation, pipeline visibility, and forecasting accuracy with sales, RevOps, and product teams.",
+        "Optimized GTM tech stack to ensure seamless workflows and customer engagement improvement.",
+        "Proactively identified customer pain points by analyzing health metrics, collaborating with GTM teams to implement early intervention strategies that reduced churn and improved adoption.",
+        "Contributed to the delivery of the annual SKO event, curating content and coordinating post-event training.",
+        "Developed scalable support resources, including self-service documentation, knowledge bases, and training materials, to enhance customer enablement and reduce support tickets."
       ]
     },
     {
       "company": "JumpCloud",
       "position": "Senior Customer Success Manager",
       "url": "https://jumpcloud.com",
-      "start_date": "05/21/2021",
+      "start_date": "05/01/2021",
       "end_date": "12/31/2021",
-      "summary": "Short summary about previous job and what that position entailed",
+      "summary": "Managed a $10M ARR portfolio, increasing retention by 20% and expanding NRR by 115%.",
       "highlights": [
-        "First Duty of Previous Job",
-        "Second Duty of Previous Job",
-        "Third Duty of Previous Job"
+        "Reduced churn risk by 30%, securing $500K through proactive customer intervention strategies.",
+        "Led QBRs & EBRs aligning customer goals with the product roadmap to drive retention and expansion.",
+        "Drove higher adoption of new features through structured success plans and tailored training.",
+        "Identified and executed expansion opportunities, working closely with Sales for upsells and renewals.",
+        "Led on-site customer success engagements and attended industry events to strengthen client relationships and promote best practices.",
+        "Partnered with sales and finance teams to support renewals, upsells, and procurement cycle planning for enterprise customers.",
+        "Led the development of the Pooled Scale Team, creating a structured, scalable support model that improved response times and customer engagement while ensuring team accountability for key performance metrics."
+      ]
+    },
+    {
+      "company": "ToolWatch",
+      "position": "Lead Customer Success Manager",
+      "url": "https://toolwatch.com",
+      "start_date": "09/01/2017",
+      "end_date": "05/01/2021",
+      "summary": "Held full accountability for a $4M ARR portfolio, driving 115% NRR growth by proactively identifying upsell opportunities and strengthening customer relationships.",
+      "highlights": [
+        "Scaled the CS team from 1 to 5 members, enhancing team performance through structured onboarding.",
+        "Designed engagement frameworks, reducing onboarding time by 40% and accelerating customer workflows.",
+        "Led technical enablement, ensuring seamless integration of product features for enterprise customers.",
+        "Implemented health score monitoring and intervention strategies to mitigate churn risk.",
+        "Led on-site customer success engagements and attended industry events to strengthen client relationships and promote best practices.",
+        "Designed scalable support frameworks by creating comprehensive help documentation, FAQs, and user training programs, improving customer self-sufficiency."
+      ]
+    },
+    {
+      "company": "Progress Testing",
+      "position": "General Manager",
+      "url": "https://progresstesting.com",
+      "start_date": "05/01/2015",
+      "end_date": "08/01/2017",
+      "summary": "Led business operations for a $20M entity, driving revenue growth and efficiency through optimized go-to-market strategies.",
+      "highlights": [
+        "Drove $5M in contracts by enhancing sales and marketing execution across K-12 districts.",
+        "Aligned business functions to improve customer retention, efficiency, and revenue growth.",
+        "Optimized sales and marketing execution, refining pricing models and customer acquisition strategies.",
+        "Fostered leadership development, mentoring department heads in a culture of innovation and accountability."
+      ]
+    },
+    {
+      "company": "Dropback In Academy",
+      "position": "Teacher",
+      "url": "https://dropback.com",
+      "start_date": "08/01/2011",
+      "end_date": "01/01/2014",
+      "summary": "Increased student success rates by 35% by implementing personalized intervention strategies and providing academic and emotional support.",
+      "highlights": [
+        "Developed and taught an all-inclusive GED-focused curriculum, helping at-risk students gain the skills and confidence needed to graduate.",
+        "Provided one-on-one mentorship to address academic struggles, build confidence, and support students through social and emotional challenges.",
+        "Collaborated with families, social workers, and community organizations to create a strong support network that fostered long-term student success."
       ]
     }
   ],
@@ -110,7 +162,8 @@
       "location": "Gainesville, FL",
       "url": "https://www.ufl.edu/",
       "degree": "M.A. in Health Education and Behavior",
-      "graduation_date": "12/2010"
+      "graduation_date": "12/2010",
+      "gpa": "3.8"
     },
     {
       "institution": "University of Florida",
@@ -122,54 +175,156 @@
   ],
   "skills": [
     {
-      "name": "SaaS Strategy & Operations",
+      "name": "Customer Success & Engagement",
       "proficiency": 100,
       "proficiency_label": "Proficiency Level"
     },
     {
-      "name": "Data-Driven Decision Making",
+      "name": "Customer Journey Mapping",
       "proficiency": 100,
       "proficiency_label": "Proficiency Level"
     },
     {
-      "name": "Technical Problem-Solving & Process Optimization",
+      "name": "Health Metrics (NPS, CSAT)",
       "proficiency": 100,
       "proficiency_label": "Proficiency Level"
     },
     {
-      "name": "Data Analysis & Insights",
-      "proficiency": 95,
+      "name": "Executive Presentations & Storytelling (QBRs, EBRs, Sales Enablement, Customer Training)",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Retention & Expansion",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Executive Relationship Management",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Product Adoption",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Stakeholder Engagement",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Renewal & Expansion Strategies",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "AI & Automation",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "SaaS Platforms (Salesforce, Gainsight, Zendesk, Jira, Linear)",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Data & Analytics (Looker, Gong, Tableau, GSheets, Excel)",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Process Automation & Enablement",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Cross-Functional Collaboration",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "GTM Strategy Alignment",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "B2B SaaS",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Knowledge of Enterprise Procurement, Budgeting Cycles, and Contract Negotiations",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Security & Compliance Reviews (SOC 2, ISO 27001, GDPR, HIPAA)",
+      "proficiency": 100,
+      "proficiency_label": "Proficiency Level"
+    },
+    {
+      "name": "Remote & Hybrid Experience",
+      "proficiency": 100,
       "proficiency_label": "Proficiency Level"
     }
   ],
   "interests": [
     {
-      "name": "Technology & AI Experimentation",
-      "summary": "Enthusiastic about emerging tech, always testing AI tools, automation frameworks, and new SaaS innovations",
-      "images": [
-        {
-          "img_path": "img/technology_experimentation_1.svg",
-          "caption": "We Can Create Anything"
-        },
-        {
-          "img_path": "img/technology_experimentation_2.svg",
-          "caption": "There is nothing we can't accomplish"
-        }
-      ]
+      "name": "Building AI Agents",
+      "summary": "Building AI Agents",
+      "images": []
     },
     {
-      "name": "Hiking & Outdoor Exploration",
-      "summary": "Passionate about exploring nature, whether it's tackling scenic trails in Colorado or discovering new landscapes",
-      "images": [
-        {
-          "img_path": "img/Hiking_Mountain_Landscape.svg",
-          "caption": "Image Caption 9"
-        },
-        {
-          "img_path": "img/Hiking_Trail_Exploration.svg",
-          "caption": "Image Caption 10"
-        }
-      ]
+      "name": "Python",
+      "summary": "Python",
+      "images": []
+    },
+    {
+      "name": "Harvard Online Courses",
+      "summary": "Harvard Online Courses",
+      "images": []
+    },
+    {
+      "name": "Movies",
+      "summary": "Movies",
+      "images": []
+    },
+    {
+      "name": "Reading",
+      "summary": "Reading",
+      "images": []
+    },
+    {
+      "name": "Blogging",
+      "summary": "Blogging",
+      "images": []
+    },
+    {
+      "name": "Traveling",
+      "summary": "Traveling",
+      "images": []
+    },
+    {
+      "name": "Weightlifting",
+      "summary": "Weightlifting",
+      "images": []
+    },
+    {
+      "name": "Running",
+      "summary": "Running",
+      "images": []
+    },
+    {
+      "name": "Observational Writing",
+      "summary": "Observational Writing",
+      "images": []
+    },
+    {
+      "name": "Mindfulness",
+      "summary": "Mindfulness",
+      "images": []
     }
   ],
   "languages": [

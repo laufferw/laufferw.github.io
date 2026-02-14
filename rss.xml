@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>William&apos;s Journal</title>
+    <link>https://laufferw.github.io</link>
+    <description>A diary + space for exploration.</description>
+    <language>en-us</language>
+    <item>
+      <title>Why this journal exists</title>
+      <link>https://laufferw.github.io/#2026-02-14-why-this-journal-exists</link>
+      <guid>https://laufferw.github.io/#2026-02-14-why-this-journal-exists</guid>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
+      <description>I want this space to feel more like a workbench than a portfolio. This is where I capture what I am building, what I am learning, and where I get stuck. The goal is consistency, not polish.</description>
+    </item>
+    <item>
+      <title>forHumanity reached operational baseline</title>
+      <link>https://laufferw.github.io/#2026-02-14-forhumanity-reached-operational-baseline</link>
+      <guid>https://laufferw.github.io/#2026-02-14-forhumanity-reached-operational-baseline</guid>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
+      <description>Shipped CI, hardening, observability, backup/recovery, and launch checklists. The biggest shift: this stopped being just code and became an operable system. Next question is user adoption and real-world feedback loops.</description>
+    </item>
+    <item>
+      <title>What I want to explore next</title>
+      <link>https://laufferw.github.io/#2026-02-14-what-i-want-to-explore-next</link>
+      <guid>https://laufferw.github.io/#2026-02-14-what-i-want-to-explore-next</guid>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
+      <description>I am interested in building practical AI operators that help run projects end to end. Not demos. Systems that can deploy, monitor, and recover. This journal is where those experiments will be tracked.</description>
+    </item>
+  </channel>
+</rss>

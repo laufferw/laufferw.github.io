@@ -1,32 +1,35 @@
-[
-  {
-    "title": "Why this journal exists",
-    "date": "2026-02-14",
-    "body": [
-      "I want this space to feel more like a workbench than a portfolio.",
-      "This is where I capture what I am building, what I am learning, and where I get stuck.",
-      "The goal is consistency, not polish."
-    ],
-    "topics": ["journal", "meta"]
-  },
-  {
-    "title": "forHumanity reached operational baseline",
-    "date": "2026-02-14",
-    "body": [
-      "Shipped CI, hardening, observability, backup/recovery, and launch checklists.",
-      "The biggest shift: this stopped being just code and became an operable system.",
-      "Next question is user adoption and real-world feedback loops."
-    ],
-    "topics": ["forhumanity", "build-log", "ops"]
-  },
-  {
-    "title": "What I want to explore next",
-    "date": "2026-02-14",
-    "body": [
-      "I am interested in building practical AI operators that help run projects end to end.",
-      "Not demos. Systems that can deploy, monitor, and recover.",
-      "This journal is where those experiments will be tracked."
-    ],
-    "topics": ["ai", "ideas", "exploration"]
-  }
-]
+{
+  "_how_to_add": "Copy the format from journal-template.md and add new entries under entries[]",
+  "entries": [
+    {
+      "title": "Why this journal exists",
+      "date": "2026-02-14",
+      "body": [
+        "I want this space to feel more like a workbench than a portfolio.",
+        "This is where I capture what I am building, what I am learning, and where I get stuck.",
+        "The goal is consistency, not polish."
+      ],
+      "topics": ["journal", "meta"]
+    },
+    {
+      "title": "forHumanity reached operational baseline",
+      "date": "2026-02-14",
+      "body": [
+        "Shipped CI, hardening, observability, backup/recovery, and launch checklists.",
+        "The biggest shift: this stopped being just code and became an operable system.",
+        "Next question is user adoption and real-world feedback loops."
+      ],
+      "topics": ["forhumanity", "build-log", "ops"]
+    },
+    {
+      "title": "What I want to explore next",
+      "date": "2026-02-14",
+      "body": [
+        "I am interested in building practical AI operators that help run projects end to end.",
+        "Not demos. Systems that can deploy, monitor, and recover.",
+        "This journal is where those experiments will be tracked."
+      ],
+      "topics": ["ai", "ideas", "exploration"]
+    }
+  ]
+}

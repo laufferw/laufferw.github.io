@@ -45,7 +45,8 @@ async function loadJournal() {
   const res = await fetch('data/journal.json', { cache: 'no-store' });
   if (!res.ok) throw new Error(`Failed to load journal data (${res.status})`);
 
-  entries = await res.json();
+  const payload = await res.json();
+  entries = (payload.entries || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date));
   allTopics = ['all', ...new Set(entries.flatMap((e) => e.topics || []))];
 
   renderTopics();

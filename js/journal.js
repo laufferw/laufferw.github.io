@@ -1,37 +1,5 @@
-const entries = [
-  {
-    title: 'Why this journal exists',
-    date: '2026-02-14',
-    body: [
-      'I want this space to feel more like a workbench than a portfolio.',
-      'This is where I capture what I am building, what I am learning, and where I get stuck.',
-      'The goal is consistency, not polish.'
-    ],
-    topics: ['journal', 'meta']
-  },
-  {
-    title: 'forHumanity reached operational baseline',
-    date: '2026-02-14',
-    body: [
-      'Shipped CI, hardening, observability, backup/recovery, and launch checklists.',
-      'The biggest shift: this stopped being “just code” and became an operable system.',
-      'Next question is user adoption and real-world feedback loops.'
-    ],
-    topics: ['forhumanity', 'build-log', 'ops']
-  },
-  {
-    title: 'What I want to explore next',
-    date: '2026-02-14',
-    body: [
-      'I am interested in building practical AI operators that help run projects end to end.',
-      'Not demos. Systems that can deploy, monitor, and recover.',
-      'This journal is where those experiments will be tracked.'
-    ],
-    topics: ['ai', 'ideas', 'exploration']
-  }
-];
-
-const allTopics = ['all', ...new Set(entries.flatMap((e) => e.topics))];
+let entries = [];
+let allTopics = ['all'];
 let active = 'all';
 
 const topicsEl = document.getElementById('topics');
@@ -73,5 +41,18 @@ function renderEntries() {
   });
 }
 
-renderTopics();
-renderEntries();
+async function loadJournal() {
+  const res = await fetch('data/journal.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Failed to load journal data (${res.status})`);
+
+  entries = await res.json();
+  allTopics = ['all', ...new Set(entries.flatMap((e) => e.topics || []))];
+
+  renderTopics();
+  renderEntries();
+}
+
+loadJournal().catch((err) => {
+  console.error(err);
+  entriesEl.innerHTML = '<p>Could not load journal entries right now.</p>';
+});

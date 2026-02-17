@@ -6,12 +6,21 @@
     <description>A diary + space for exploration.</description>
     <language>en-us</language>
     <item>
+      <title>AI, uncertainty, and what it means to stay human</title>
+      <link>https://laufferw.github.io/#2026-02-17-ai-uncertainty-and-what-it-means-to-stay-human</link>
+      <guid>https://laufferw.github.io/#2026-02-17-ai-uncertainty-and-what-it-means-to-stay-human</guid>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
+      <description>I often think about the impact AI will have on life, society, work, everything, and truth. It feels unavoidable. Everywhere you look, there is an article about the positives and the negatives. Just this past weekend, there was a piece in the NY Times about an 85-year-old woman whose quality of life improved after getting a companion robot. At the same time, there was an opinion piece mourning the loss of human connection and pointing out that even the people building large language systems do not really know what will happen or where this all goes. I cannot help feeling like this is how evolution works. There are no certainties. No guarantees. We cannot know everything, and we cannot control everything yet. Still, we try, and that tension is fascinating. As humans, we want to control as much as possible while innovating as fast as possible in ways that are inherently uncontrollable. I understand the fear and uncertainty. I do find it concerning when people choose a chatbot or avatar over real human connection. To me, that reflects a deeper societal failure, that people have become so isolated that those outlets are the only way they feel heard and seen. At the same time, I believe AI can help us advance and explore what it really means to be human, and what humanity is, beyond productivity gains, faster output, or corporate enrichment. The real question is: How do we evolve as humanity while developing and bringing this potential new life form into existence? That is the question I look forward to thinking about as we move forward.</description>
+    </item>
+
+    <item>
       <title>Why this journal exists</title>
       <link>https://laufferw.github.io/#2026-02-14-why-this-journal-exists</link>
       <guid>https://laufferw.github.io/#2026-02-14-why-this-journal-exists</guid>
       <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
       <description>I want this space to feel more like a workbench than a portfolio. This is where I capture what I am building, what I am learning, and where I get stuck. The goal is consistency, not polish.</description>
     </item>
+
     <item>
       <title>forHumanity reached operational baseline</title>
       <link>https://laufferw.github.io/#2026-02-14-forhumanity-reached-operational-baseline</link>
@@ -19,6 +28,7 @@
       <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
       <description>Shipped CI, hardening, observability, backup/recovery, and launch checklists. The biggest shift: this stopped being just code and became an operable system. Next question is user adoption and real-world feedback loops.</description>
     </item>
+
     <item>
       <title>What I want to explore next</title>
       <link>https://laufferw.github.io/#2026-02-14-what-i-want-to-explore-next</link>

@@ -2,6 +2,25 @@
   "_how_to_add": "Copy the format from journal-template.md and add new entries under entries[]",
   "entries": [
     {
+      "title": "Replacing Strong with something I actually own",
+      "date": "2026-03-11",
+      "body": [
+        "I have been using the Strong app to track lifting for a while. It works, but I do not own the data in any meaningful way, and I wanted the ability to close the loop between logging a workout and getting recommendations for the next one.",
+        "Today I shipped that. LiftCycle is a Next.js app with a Supabase backend. You log your sets, and overnight an agent I have running analyzes the last two sessions per lift and applies linear progression rules. Open the app next session and your weights are already filled in.",
+        "The progression logic is simple on purpose: if you hit all reps cleanly two sessions in a row, add weight. If you missed reps, hold. If you have stalled three sessions at the same weight, flag it. No percentages, no periodization charts, just a system that keeps moving forward until it cannot.",
+        "The part I am most happy about is that I own all of it. The app is mine, the database is mine, the progression script runs on my own infrastructure. No subscription, no vendor lock-in, no dark patterns nudging me toward a premium tier.",
+        "I also started a paper trading bot for BTC/USD today. DCA plus momentum signals using a 20-period SMA and RSI. One hundred dollars of virtual capital, running hourly. Checking back in a week to see if the strategy is worth putting real money behind.",
+        "Two different projects, same underlying idea: automate the boring part so you can focus on the part that actually requires you."
+      ],
+      "topics": [
+        "build-log",
+        "ai",
+        "fitness",
+        "crypto",
+        "tools"
+      ]
+    },
+    {
       "title": "Why this journal exists",
       "date": "2026-02-14",
       "body": [

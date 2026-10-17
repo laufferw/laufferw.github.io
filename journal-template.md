@@ -9,6 +9,7 @@ Use this format when adding a new entry to `data/journal.json`.
   "body": [
     "Paragraph 1.",
     "Paragraph 2.",
+    "## An optional subheading",
     "Paragraph 3."
   ],
   "topics": ["topic-one", "topic-two"]

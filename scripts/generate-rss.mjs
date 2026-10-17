@@ -27,7 +27,7 @@ const items = entries
   .map((e, idx) => {
     const slug = `${e.date}-${e.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
     const link = `${siteUrl}/#${slug}`;
-    const description = esc((e.body || []).join(' '));
+    const description = esc((e.body || []).map((p) => p.replace(/^## /, '')).join(' '));
     const pubDate = new Date(e.date + 'T00:00:00Z').toUTCString();
     return `
     <item>

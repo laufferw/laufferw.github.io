@@ -54,7 +54,7 @@ function renderEntries() {
     article.innerHTML = `
       <h2>${entry.title}</h2>
       <div class="meta"><a href="#${article.id}">${entry.date}</a></div>
-      ${entry.body.map((p) => `<p>${p}</p>`).join('')}
+      ${entry.body.map((p) => (p.startsWith('## ') ? `<h3>${p.slice(3)}</h3>` : `<p>${p}</p>`)).join('')}
       <div class="topics">
         ${entry.topics.map((t) => `<span class="topic-chip">${t}</span>`).join('')}
       </div>

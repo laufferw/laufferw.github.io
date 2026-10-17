@@ -11,13 +11,12 @@ Use this format when adding a new entry to `data/journal.json`.
     "Paragraph 2.",
     "## An optional subheading",
     "Paragraph 3."
-  ],
-  "topics": ["topic-one", "topic-two"]
+  ]
 }
 ```
 
 ## Tips
 - Keep entries short and honest.
 - Prefer 2-6 short paragraphs.
-- Use topics as your organizational structure.
+- The newest entry (by date) is the homepage; the rest are listed in archive.html.
 - Put newest entries near the top of the JSON array.

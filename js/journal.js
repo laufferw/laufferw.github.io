@@ -1,9 +1,8 @@
+// Shared by index.html (one post) and archive.html (list of all posts).
 let entries = [];
-let allTopics = ['all'];
-let active = 'all';
 
-const topicsEl = document.getElementById('topics');
-const entriesEl = document.getElementById('entries');
+const postEl = document.getElementById('post');
+const archiveEl = document.getElementById('archive');
 
 // Must match the slug in scripts/generate-rss.mjs so feed links land on the entry.
 function entrySlug(entry) {
@@ -11,57 +10,40 @@ function entrySlug(entry) {
   return `${entry.date}-${title}`;
 }
 
-function scrollToHashEntry() {
+function renderBody(body) {
+  return body.map((p) => (p.startsWith('## ') ? `<h3>${p.slice(3)}</h3>` : `<p>${p}</p>`)).join('');
+}
+
+// Show the post named in the URL hash, or the newest post if there isn't one.
+function renderPost() {
   const id = decodeURIComponent(location.hash.slice(1));
-  if (!id) return;
-  if (active !== 'all' && !document.getElementById(id)) {
-    active = 'all';
-    renderTopics();
-    renderEntries();
-  }
-  const el = document.getElementById(id);
-  if (!el) return;
-  // :target doesn't match entries rendered after load, so mark it ourselves.
-  document.querySelectorAll('.entry.is-target').forEach((e) => e.classList.remove('is-target'));
-  el.classList.add('is-target');
-  el.scrollIntoView();
-}
+  let index = entries.findIndex((e) => entrySlug(e) === id);
+  if (index === -1) index = 0;
 
-function renderTopics() {
-  topicsEl.innerHTML = '';
-  allTopics.forEach((topic) => {
-    const btn = document.createElement('button');
-    btn.className = `tag ${topic === active ? 'active' : ''}`;
-    btn.textContent = topic;
-    btn.onclick = () => {
-      active = topic;
-      renderTopics();
-      renderEntries();
-    };
-    topicsEl.appendChild(btn);
-  });
-}
+  const entry = entries[index];
+  const newer = entries[index - 1];
+  const older = entries[index + 1];
+  const slug = entrySlug(entry);
 
-function renderEntries() {
-  const filtered = active === 'all' ? entries : entries.filter((e) => e.topics.includes(active));
-  entriesEl.innerHTML = '';
-
-  filtered.forEach((entry) => {
-    const article = document.createElement('article');
-    article.className = 'entry';
-    article.id = entrySlug(entry);
-
-    article.innerHTML = `
+  postEl.innerHTML = `
+    <article class="entry" id="${slug}">
       <h2>${entry.title}</h2>
-      <div class="meta"><a href="#${article.id}">${entry.date}</a></div>
-      ${entry.body.map((p) => (p.startsWith('## ') ? `<h3>${p.slice(3)}</h3>` : `<p>${p}</p>`)).join('')}
-      <div class="topics">
-        ${entry.topics.map((t) => `<span class="topic-chip">${t}</span>`).join('')}
-      </div>
-    `;
+      <div class="meta"><a href="#${slug}">${entry.date}</a></div>
+      ${renderBody(entry.body)}
+    </article>
+    <nav class="post-nav">
+      ${newer ? `<a href="#${entrySlug(newer)}">&larr; Newer: ${newer.title}</a>` : '<span></span>'}
+      ${older ? `<a href="#${entrySlug(older)}">Older: ${older.title} &rarr;</a>` : ''}
+    </nav>
+  `;
+  document.title = index === 0 && !id ? 'William Lauffer' : `${entry.title} | William Lauffer`;
+  window.scrollTo(0, 0);
+}
 
-    entriesEl.appendChild(article);
-  });
+function renderArchive() {
+  archiveEl.innerHTML = `<ul class="archive-list">${entries
+    .map((e) => `<li><span class="archive-date">${e.date}</span><a href="./#${entrySlug(e)}">${e.title}</a></li>`)
+    .join('')}</ul>`;
 }
 
 async function loadJournal() {
@@ -70,16 +52,16 @@ async function loadJournal() {
 
   const payload = await res.json();
   entries = (payload.entries || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-  allTopics = ['all', ...new Set(entries.flatMap((e) => e.topics || []))];
 
-  renderTopics();
-  renderEntries();
-  scrollToHashEntry();
+  if (archiveEl) {
+    renderArchive();
+  } else {
+    renderPost();
+    window.addEventListener('hashchange', renderPost);
+  }
 }
-
-window.addEventListener('hashchange', scrollToHashEntry);
 
 loadJournal().catch((err) => {
   console.error(err);
-  entriesEl.innerHTML = '<p>Could not load journal entries right now.</p>';
+  (postEl || archiveEl).innerHTML = '<p>Could not load journal entries right now.</p>';
 });

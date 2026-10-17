@@ -32,11 +32,6 @@
         "The same discipline applies to the business case. Time saved is real, but it is only worth money if it is used. Freed hours that turn into more accounts per CSM, or a hire you don't need to make, are savings. Freed hours that vanish into more meetings are not. The <a href=\"https://github.com/laufferw/CS-Claude-Ops/blob/main/tools/roi_calculator.py\">ROI calculator</a> reports the cash return on its own for that reason.",
         "A copilot pays for itself when it helps people make better decisions, sooner, about the accounts that matter. That is a high bar, and it is the right one.",
         "<em>Cross-posted from the <a href=\"https://github.com/laufferw/CS-Claude-Ops/blob/main/essays/claude-drafts-people-decide.md\">essays folder</a> in CS-Claude-Ops.</em>"
-      ],
-      "topics": [
-        "ai",
-        "customer-success",
-        "essay"
       ]
     },
     {
@@ -49,13 +44,6 @@
         "The part I am most happy about is that I own all of it. The app is mine, the database is mine, the progression script runs on my own infrastructure. No subscription, no vendor lock-in, no dark patterns nudging me toward a premium tier.",
         "I also started a paper trading bot for BTC/USD today. DCA plus momentum signals using a 20-period SMA and RSI. One hundred dollars of virtual capital, running hourly. Checking back in a week to see if the strategy is worth putting real money behind.",
         "Two different projects, same underlying idea: automate the boring part so you can focus on the part that actually requires you."
-      ],
-      "topics": [
-        "build-log",
-        "ai",
-        "fitness",
-        "crypto",
-        "tools"
       ]
     },
     {
@@ -65,10 +53,6 @@
         "I want this space to feel more like a workbench than a portfolio.",
         "This is where I capture what I am building, what I am learning, and where I get stuck.",
         "The goal is consistency, not polish."
-      ],
-      "topics": [
-        "journal",
-        "meta"
       ]
     },
     {
@@ -78,11 +62,6 @@
         "Shipped CI, hardening, observability, backup/recovery, and launch checklists.",
         "The biggest shift: this stopped being just code and became an operable system.",
         "Next question is user adoption and real-world feedback loops."
-      ],
-      "topics": [
-        "forhumanity",
-        "build-log",
-        "ops"
       ]
     },
     {
@@ -92,11 +71,6 @@
         "I am interested in building practical AI operators that help run projects end to end.",
         "Not demos. Systems that can deploy, monitor, and recover.",
         "This journal is where those experiments will be tracked."
-      ],
-      "topics": [
-        "ai",
-        "ideas",
-        "exploration"
       ]
     },
     {
@@ -116,12 +90,6 @@
         "At the same time, I believe AI can help us advance and explore what it really means to be human, and what humanity is, beyond productivity gains, faster output, or corporate enrichment.",
         "The real question is: How do we evolve as humanity while developing and bringing this potential new life form into existence?",
         "That is the question I look forward to thinking about as we move forward."
-      ],
-      "topics": [
-        "ai",
-        "society",
-        "ethics",
-        "journal"
       ]
     }
   ]

@@ -5,6 +5,28 @@ let active = 'all';
 const topicsEl = document.getElementById('topics');
 const entriesEl = document.getElementById('entries');
 
+// Must match the slug in scripts/generate-rss.mjs so feed links land on the entry.
+function entrySlug(entry) {
+  const title = entry.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `${entry.date}-${title}`;
+}
+
+function scrollToHashEntry() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  if (active !== 'all' && !document.getElementById(id)) {
+    active = 'all';
+    renderTopics();
+    renderEntries();
+  }
+  const el = document.getElementById(id);
+  if (!el) return;
+  // :target doesn't match entries rendered after load, so mark it ourselves.
+  document.querySelectorAll('.entry.is-target').forEach((e) => e.classList.remove('is-target'));
+  el.classList.add('is-target');
+  el.scrollIntoView();
+}
+
 function renderTopics() {
   topicsEl.innerHTML = '';
   allTopics.forEach((topic) => {
@@ -27,10 +49,11 @@ function renderEntries() {
   filtered.forEach((entry) => {
     const article = document.createElement('article');
     article.className = 'entry';
+    article.id = entrySlug(entry);
 
     article.innerHTML = `
       <h2>${entry.title}</h2>
-      <div class="meta">${entry.date}</div>
+      <div class="meta"><a href="#${article.id}">${entry.date}</a></div>
       ${entry.body.map((p) => `<p>${p}</p>`).join('')}
       <div class="topics">
         ${entry.topics.map((t) => `<span class="topic-chip">${t}</span>`).join('')}
@@ -51,7 +74,10 @@ async function loadJournal() {
 
   renderTopics();
   renderEntries();
+  scrollToHashEntry();
 }
+
+window.addEventListener('hashchange', scrollToHashEntry);
 
 loadJournal().catch((err) => {
   console.error(err);

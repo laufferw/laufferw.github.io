@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Replacing Strong with something I actually own | William Lauffer</title>
+  <meta name="description" content="I have been using the Strong app to track lifting for a while. It works, but I do not own the data in any meaningful way, and I wanted the ability to close..." />
+  <link rel="canonical" href="https://laufferw.github.io/posts/2026-03-11-replacing-strong-with-something-i-actually-own.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="William Lauffer" />
+  <meta property="og:title" content="Replacing Strong with something I actually own" />
+  <meta property="og:description" content="I have been using the Strong app to track lifting for a while. It works, but I do not own the data in any meaningful way, and I wanted the ability to close..." />
+  <meta property="og:url" content="https://laufferw.github.io/posts/2026-03-11-replacing-strong-with-something-i-actually-own.html" />
+  <meta property="og:image" content="https://laufferw.github.io/icon-512x512.png" />
+  <meta property="article:published_time" content="2026-03-11" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="../favicon.ico" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <link rel="alternate" type="application/rss+xml" title="William's Journal" href="../rss.xml" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f6f1fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16111c" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="../css/modern_normalize.css" />
+  <link rel="preload" href="../fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../css/journal.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>William Lauffer</h1>
+      <p class="sub">Builder. Things I am making, learning, and figuring out.</p>
+      <nav class="site-nav"><a href="../">Latest</a> · <a href="../archive.html">Archive</a> · <a href="../rss.xml">RSS</a></nav>
+    </header>
+
+    <main>
+      <article class="entry" id="2026-03-11-replacing-strong-with-something-i-actually-own">
+      <h2>Replacing Strong with something I actually own</h2>
+      <div class="meta"><a href="2026-03-11-replacing-strong-with-something-i-actually-own.html">2026-03-11</a></div>
+      <p>I have been using the Strong app to track lifting for a while. It works, but I do not own the data in any meaningful way, and I wanted the ability to close the loop between logging a workout and getting recommendations for the next one.</p>
+      <p>Today I shipped that. LiftCycle is a Next.js app with a Supabase backend. You log your sets, and overnight an agent I have running analyzes the last two sessions per lift and applies linear progression rules. Open the app next session and your weights are already filled in.</p>
+      <p>The progression logic is simple on purpose: if you hit all reps cleanly two sessions in a row, add weight. If you missed reps, hold. If you have stalled three sessions at the same weight, flag it. No percentages, no periodization charts, just a system that keeps moving forward until it cannot.</p>
+      <p>The part I am most happy about is that I own all of it. The app is mine, the database is mine, the progression script runs on my own infrastructure. No subscription, no vendor lock-in, no dark patterns nudging me toward a premium tier.</p>
+      <p>I also started a paper trading bot for BTC/USD today. DCA plus momentum signals using a 20-period SMA and RSI. One hundred dollars of virtual capital, running hourly. Checking back in a week to see if the strategy is worth putting real money behind.</p>
+      <p>Two different projects, same underlying idea: automate the boring part so you can focus on the part that actually requires you.</p>
+      </article>
+      <nav class="post-nav">
+        <a href="2026-10-17-claude-drafts-people-decide.html">&larr; Newer: Claude Drafts, People Decide</a>
+        <a href="2026-02-17-ai-uncertainty-and-what-it-means-to-stay-human.html">Older: AI, uncertainty, and what it means to stay human &rarr;</a>
+      </nav>
+    </main>
+
+    <footer>
+      <p class="foot">
+        <a href="https://github.com/laufferw" target="_blank">GitHub</a> ·
+        <a href="https://linkedin.com/in/williamlauffer" target="_blank">LinkedIn</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

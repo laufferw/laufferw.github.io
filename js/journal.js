@@ -4,7 +4,7 @@ let entries = [];
 const postEl = document.getElementById('post');
 const archiveEl = document.getElementById('archive');
 
-// Must match the slug in scripts/generate-rss.mjs so feed links land on the entry.
+// Must match the slug in scripts/generate-rss.mjs and scripts/generate-posts.mjs.
 function entrySlug(entry) {
   const title = entry.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   return `${entry.date}-${title}`;
@@ -14,35 +14,37 @@ function renderBody(body) {
   return body.map((p) => (p.startsWith('## ') ? `<h3>${p.slice(3)}</h3>` : `<p>${p}</p>`)).join('');
 }
 
-// Show the post named in the URL hash, or the newest post if there isn't one.
+function postUrl(entry) {
+  return `posts/${entrySlug(entry)}.html`;
+}
+
+// Show the newest post. Old links like /#<slug> forward to that entry's own page.
 function renderPost() {
   const id = decodeURIComponent(location.hash.slice(1));
-  let index = entries.findIndex((e) => entrySlug(e) === id);
-  if (index === -1) index = 0;
-
-  const entry = entries[index];
-  const newer = entries[index - 1];
-  const older = entries[index + 1];
+  const linked = entries.find((e) => entrySlug(e) === id);
+  if (linked) {
+    location.replace(postUrl(linked));
+    return;
+  }
+  const [entry, older] = entries;
   const slug = entrySlug(entry);
 
   postEl.innerHTML = `
     <article class="entry" id="${slug}">
       <h2>${entry.title}</h2>
-      <div class="meta"><a href="#${slug}">${entry.date}</a></div>
+      <div class="meta"><a href="${postUrl(entry)}">${entry.date}</a></div>
       ${renderBody(entry.body)}
     </article>
     <nav class="post-nav">
-      ${newer ? `<a href="#${entrySlug(newer)}">&larr; Newer: ${newer.title}</a>` : '<span></span>'}
-      ${older ? `<a href="#${entrySlug(older)}">Older: ${older.title} &rarr;</a>` : ''}
+      <span></span>
+      ${older ? `<a href="${postUrl(older)}">Older: ${older.title} &rarr;</a>` : ''}
     </nav>
   `;
-  document.title = index === 0 && !id ? 'William Lauffer' : `${entry.title} | William Lauffer`;
-  window.scrollTo(0, 0);
 }
 
 function renderArchive() {
   archiveEl.innerHTML = `<ul class="archive-list">${entries
-    .map((e) => `<li><span class="archive-date">${e.date}</span><a href="./#${entrySlug(e)}">${e.title}</a></li>`)
+    .map((e) => `<li><span class="archive-date">${e.date}</span><a href="${postUrl(e)}">${e.title}</a></li>`)
     .join('')}</ul>`;
 }
 

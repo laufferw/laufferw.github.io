@@ -26,14 +26,16 @@ const esc = (s = '') =>
 const items = entries
   .map((e, idx) => {
     const slug = `${e.date}-${e.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
-    const link = `${siteUrl}/#${slug}`;
+    const link = `${siteUrl}/posts/${slug}.html`;
+    // Keep the original hash-style guid so feed readers don't re-show old items as new.
+    const guid = `${siteUrl}/#${slug}`;
     const description = esc((e.body || []).map((p) => p.replace(/^## /, '')).join(' '));
     const pubDate = new Date(e.date + 'T00:00:00Z').toUTCString();
     return `
     <item>
       <title>${esc(e.title)}</title>
       <link>${link}</link>
-      <guid>${link}</guid>
+      <guid isPermaLink="false">${guid}</guid>
       <pubDate>${pubDate}</pubDate>
       <description>${description}</description>
     </item>`;

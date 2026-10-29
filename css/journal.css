@@ -1,6 +1,6 @@
-/* Lilac palette. Light by default, aubergine in dark mode. */
+/* Lilac palette. Mushroom (SW 9587) background by default, aubergine in dark mode. */
 :root {
-  --bg: #f6f1fa;
+  --bg: #d0c7b7; /* SW 9587 Mushroom */
   --surface: #fdfbff;
   --border: #e6dcf0;
   --text: #2b2135;

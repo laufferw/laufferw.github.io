@@ -17,7 +17,6 @@ in one JSON file and are rendered in the browser.
 | `js/journal.js` | Renders entries from the JSON |
 | `css/journal.css` | Site styles (Fraunces font, self-hosted in `fonts/`) |
 | `rss.xml` | RSS feed, generated from the journal |
-| `ccmatrix/` | Terminal Matrix rain, a Coding Challenges solution (not part of the site) |
 
 ## Add a journal entry
 

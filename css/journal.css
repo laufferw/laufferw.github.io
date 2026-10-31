@@ -1,24 +1,24 @@
-/* Lilac palette. Mushroom (SW 9587) background by default, dark mushroom in dark mode. */
+/* Mushroom palette: SW 9587 Mushroom background, warm umber accents. Dark mode is a dark mushroom. */
 :root {
   --bg: #d0c7b7; /* SW 9587 Mushroom */
-  --surface: #fdfbff;
-  --border: #e6dcf0;
-  --text: #2b2135;
-  --muted: #6c5d7d;
-  --accent: #7448a8;
-  --accent-soft: #c9b0e8;
-  --selection: #e4d4f7;
+  --surface: #f8f4ee;
+  --border: #ddd3c4;
+  --text: #2a251f;
+  --muted: #5c5246;
+  --accent: #7a4528;
+  --accent-soft: #c4a184;
+  --selection: #e8d8c4;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #2a2621; /* dark take on SW 9587 Mushroom */
-    --surface: #201828;
-    --border: #342843;
-    --text: #eee8f4;
-    --muted: #a898b8;
-    --accent: #c8a6ee;
-    --accent-soft: #6d4e93;
-    --selection: #4a3566;
+    --surface: #35302a;
+    --border: #4a433a;
+    --text: #efe9e1;
+    --muted: #b3a898;
+    --accent: #dcb48c;
+    --accent-soft: #7d6048;
+    --selection: #5b4a3a;
   }
 }
 

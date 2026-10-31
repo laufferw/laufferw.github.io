@@ -1,20 +1,6 @@
 {
   "name": "William Lauffer",
   "short_name": "Lauffer",
-  "icons": [
-    {
-      "src": "/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ],
   "theme_color": "#d0c7b7",
   "background_color": "#d0c7b7",
   "display": "standalone"

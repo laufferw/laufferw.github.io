@@ -56,10 +56,8 @@ function page(entry, newer, older) {
   <meta property="og:title" content="${esc(entry.title)}" />
   <meta property="og:description" content="${esc(desc)}" />
   <meta property="og:url" content="${url}" />
-  <meta property="og:image" content="${siteUrl}/icon-512x512.png" />
   <meta property="article:published_time" content="${entry.date}" />
   <meta name="twitter:card" content="summary" />
-  <link rel="icon" href="../favicon.ico" />
   <link rel="manifest" href="../site.webmanifest" />
   <link rel="alternate" type="application/rss+xml" title="William's Journal" href="../rss.xml" />
   <meta name="color-scheme" content="light dark" />

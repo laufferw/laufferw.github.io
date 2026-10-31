@@ -63,8 +63,8 @@ function page(entry, newer, older) {
   <link rel="manifest" href="../site.webmanifest" />
   <link rel="alternate" type="application/rss+xml" title="William's Journal" href="../rss.xml" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#f6f1fa" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#16111c" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#d0c7b7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#2a2621" media="(prefers-color-scheme: dark)" />
   <link rel="stylesheet" href="../css/modern_normalize.css" />
   <link rel="preload" href="../fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="../css/journal.css" />

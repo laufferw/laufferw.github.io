@@ -1,0 +1,450 @@
+#!/usr/bin/env python3
+"""ccmatrix: the falling green text from The Matrix, in your terminal.
+
+Talks to the terminal directly with termios and ANSI escape codes; no
+third-party libraries. Press q to quit, 0-9 to change speed.
+"""
+
+import argparse
+import colorsys
+import functools
+import os
+import random
+import select
+import shlex
+import signal
+import string
+import sys
+import termios
+import time
+import tty
+
+COLOURS = {
+    "green": 2, "red": 1, "blue": 4, "white": 7,
+    "yellow": 3, "cyan": 6, "magenta": 5, "black": 0,
+}
+RGB = {
+    "green": (0, 255, 70), "red": (255, 50, 50), "blue": (70, 110, 255),
+    "white": (225, 225, 225), "yellow": (255, 225, 0), "cyan": (0, 225, 255),
+    "magenta": (255, 40, 220), "black": (0, 0, 0),
+}
+RAINBOW = [1, 3, 2, 6, 4, 5]
+ASCII_CHARS = string.ascii_letters + string.digits
+KATAKANA = "".join(chr(c) for c in range(0xFF66, 0xFF9E))  # half-width
+
+ESC = "\x1b"
+CONFIG_PATH = os.environ.get("CCMATRIX_CONFIG", os.path.expanduser("~/.ccmatrixrc"))
+
+# Message mode timings (seconds within each cycle).
+MSG_PERIOD, MSG_START, MSG_SETTLE, MSG_END = 14.0, 4.0, 6.5, 10.0
+
+
+# --------------------------------------------------------------------------
+# Command line
+# --------------------------------------------------------------------------
+
+def speed_arg(text):
+    try:
+        value = int(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(
+            f"invalid delay '{text}': must be a whole number from 0 to 10")
+    if not 0 <= value <= 10:
+        raise argparse.ArgumentTypeError(
+            f"delay {value} is out of range: must be from 0 to 10")
+    return value
+
+
+def colour_arg(text):
+    name = text.lower()
+    if name not in COLOURS:
+        raise argparse.ArgumentTypeError(
+            f"unknown colour '{text}'. Supported colours: {', '.join(COLOURS)}")
+    return name
+
+
+def read_config(path):
+    """Return extra arguments from the config file, if there is one."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            lines = f.read().splitlines()
+    except OSError:
+        return []
+    args = []
+    for line in lines:
+        args += shlex.split(line, comments=True)
+    return args
+
+
+def parse_args(argv):
+    p = argparse.ArgumentParser(
+        prog="ccmatrix",
+        description="Falling Matrix-style text. Press q to quit, 0-9 to change speed.",
+        epilog=f"Default options can be stored in {CONFIG_PATH} "
+               "(set CCMATRIX_CONFIG to use another file).")
+    p.add_argument("-s", action="store_true", dest="screensaver",
+                   help="screensaver mode: exit on any key press or mouse event")
+    p.add_argument("-u", type=speed_arg, default=4, dest="delay", metavar="DELAY",
+                   help="delay between updates, 0 (fastest) to 10 (default 4)")
+    p.add_argument("-C", type=colour_arg, default="green", dest="colour", metavar="COLOUR",
+                   help=f"trail colour: {', '.join(COLOURS)} (default green)")
+    p.add_argument("-r", action="store_true", dest="rainbow", help="rainbow trails")
+    p.add_argument("-c", action="store_true", dest="katakana",
+                   help="use half-width katakana characters")
+    p.add_argument("-b", action="store_true", dest="bold_some", help="make some characters bold")
+    p.add_argument("-B", action="store_true", dest="bold_all", help="make all characters bold")
+    p.add_argument("-a", action="store_true", dest="asynchronous",
+                   help="asynchronous scroll: every trail picks its own speed")
+    p.add_argument("-f", action="store_true", dest="flicker",
+                   help="characters in the trails flicker and change as they fall")
+    p.add_argument("-t", action="store_true", dest="truecolor",
+                   help="24-bit colour with smooth fades along each trail")
+    p.add_argument("-M", dest="message", metavar="TEXT",
+                   help="message mode: the rain briefly resolves into TEXT")
+    return p.parse_args(argv)
+
+
+# --------------------------------------------------------------------------
+# The rain
+# --------------------------------------------------------------------------
+
+class Drop:
+    __slots__ = ("head", "length", "speed", "timer")
+
+    def __init__(self, length, speed):
+        self.head = -1
+        self.length = length
+        self.speed = speed      # ticks per row; 1 is fastest
+        self.timer = random.randrange(speed)
+
+
+class Matrix:
+    def __init__(self, opts, size):
+        self.opts = opts
+        self.charset = KATAKANA if opts.katakana else ASCII_CHARS
+        self.base_rgb = RGB[opts.colour]
+        self.cols = self.rows = 0
+        self.chars, self.colour, self.bold = [], [], []
+        self.drops, self.wait, self.gap, self.colspeed = [], [], [], []
+        self.msg_cells = {}    # (x, y) -> char, where the message sits
+        self.locked = {}       # (x, y) -> char, message cells already revealed
+        self.msg_epoch = time.monotonic()
+        self.resize(*size)
+
+    # ---- layout -----------------------------------------------------------
+
+    def resize(self, cols, rows):
+        """Adapt state to a new terminal size, keeping what still fits."""
+        cols, rows = max(1, cols), max(1, rows)
+
+        def grow(grid, fill):
+            out = []
+            for x in range(cols):
+                old = grid[x] if x < len(grid) else []
+                out.append([old[y] if y < len(old) else fill() for y in range(rows)])
+            return out
+
+        self.chars = grow(self.chars, self.random_char)
+        self.colour = grow(self.colour, self.cell_colour)
+        self.bold = grow(self.bold, self.cell_bold)
+        for x in range(len(self.drops), cols):
+            self.drops.append([])
+            self.wait.append(random.randrange(rows * 2))
+            self.gap.append(0)
+            self.colspeed.append(random.choice((1, 1, 2, 2, 3)))
+        del self.drops[cols:], self.wait[cols:], self.gap[cols:], self.colspeed[cols:]
+        for x in range(cols):
+            self.drops[x] = [d for d in self.drops[x] if d.head - d.length < rows]
+        self.cols, self.rows = cols, rows
+
+        self.msg_cells.clear()
+        self.locked.clear()
+        if self.opts.message:
+            text = self.opts.message[:cols]
+            y, x0 = rows // 2, (cols - len(text)) // 2
+            self.msg_cells = {(x0 + i, y): ch for i, ch in enumerate(text) if ch != " "}
+
+    # ---- per-cell attributes chosen when a character is written ---------
+
+    def random_char(self):
+        return random.choice(self.charset)
+
+    def cell_colour(self):
+        if not self.opts.rainbow:
+            return None
+        if self.opts.truecolor:
+            r, g, b = colorsys.hsv_to_rgb(random.random(), 1.0, 1.0)
+            return (int(r * 255), int(g * 255), int(b * 255))
+        return random.choice(RAINBOW)
+
+    def cell_bold(self):
+        return self.opts.bold_all or (self.opts.bold_some and random.random() < 0.5)
+
+    # ---- drawing ------------------------------------------------------------
+
+    @staticmethod
+    @functools.lru_cache(maxsize=None)
+    def zone(d, length):
+        """Which visual band a cell is in at distance d behind the head."""
+        if d < 0 or d >= length:
+            return "blank"
+        if d == 0:
+            return "head"
+        if d <= 2:
+            return "glow"
+        if d >= length - max(1, length // 3):
+            return "dim"
+        return "trail"
+
+    @functools.lru_cache(maxsize=None)
+    def boundaries(self, length):
+        """Distances whose appearance changes when the head moves down one row."""
+        if self.opts.truecolor:
+            return tuple(range(length + 1))
+        return tuple(d for d in range(length + 1)
+                     if self.zone(d, length) != self.zone(d - 1, length))
+
+    def owner(self, x, y):
+        for drop in self.drops[x]:
+            d = drop.head - y
+            if 0 <= d < drop.length:
+                return d, drop.length
+        return None
+
+    def render(self, x, y):
+        pos = f"{ESC}[{y + 1};{x + 1}H"
+        if (x, y) in self.locked:
+            return f"{pos}{ESC}[0;1;97m{self.locked[x, y]}"
+        info = self.owner(x, y)
+        if info is None:
+            return f"{pos}{ESC}[0m "
+        d, length = info
+        ch = self.chars[x][y]
+        if d == 0:
+            return f"{pos}{ESC}[0;1;97m{ch}"
+        bold = "1;" if self.bold[x][y] else ""
+        if self.opts.truecolor:
+            r, g, b = self.colour[x][y] or self.base_rgb
+            k = 1.0 - d / length
+            k = 0.12 + 0.88 * k * k
+            if d <= 2:   # a little white bleed just behind the head
+                w = 0.45 if d == 1 else 0.2
+                r, g, b = r + (255 - r) * w, g + (255 - g) * w, b + (255 - b) * w
+            return f"{pos}{ESC}[0;{bold}38;2;{int(r * k)};{int(g * k)};{int(b * k)}m{ch}"
+        idx = self.colour[x][y]
+        if idx is None:
+            idx = COLOURS[self.opts.colour]
+        z = self.zone(d, length)
+        if z == "glow":
+            return f"{pos}{ESC}[0;{bold}9{idx}m{ch}"
+        if z == "dim":
+            return f"{pos}{ESC}[0;2;3{idx}m{ch}"
+        return f"{pos}{ESC}[0;{bold}3{idx}m{ch}"
+
+    def redraw_all(self):
+        out = [f"{ESC}[0m{ESC}[2J"]
+        for x in range(self.cols):
+            for drop in self.drops[x]:
+                for y in range(max(0, drop.head - drop.length + 1), min(self.rows, drop.head + 1)):
+                    out.append(self.render(x, y))
+        for (x, y) in self.locked:
+            out.append(self.render(x, y))
+        return out
+
+    # ---- animation ----------------------------------------------------------
+
+    def new_drop(self, x):
+        rows = self.rows
+        length = random.randint(min(4, rows), max(4, rows * 2 // 3))
+        if not self.opts.asynchronous:
+            return Drop(length, self.colspeed[x])
+        speed = random.randint(1, 5)
+        if self.drops[x]:
+            # Don't let a faster drop catch up with the one ahead of it.
+            ahead = self.drops[x][-1]
+            if speed < ahead.speed:
+                tail = ahead.head - ahead.length
+                if rows * speed < (rows - tail + 1) * ahead.speed:
+                    speed = ahead.speed
+        return Drop(length, speed)
+
+    def tick(self, now):
+        out = []
+        rows = self.rows
+        msg_phase = None
+        if self.msg_cells:
+            msg_phase = (now - self.msg_epoch) % MSG_PERIOD
+            revealing = MSG_START <= msg_phase < MSG_END
+            if not revealing and self.locked:
+                cells = list(self.locked)
+                self.locked.clear()
+                out += [self.render(x, y) for x, y in cells]
+            elif revealing and msg_phase >= MSG_SETTLE and len(self.locked) < len(self.msg_cells):
+                for cell, ch in self.msg_cells.items():
+                    if cell not in self.locked:
+                        self.locked[cell] = ch
+                        out.append(self.render(*cell))
+        else:
+            revealing = False
+
+        for x in range(self.cols):
+            drops = self.drops[x]
+            # Start a new drop once the column has waited and the last one is far enough down.
+            if self.wait[x] > 0:
+                self.wait[x] -= 1
+            elif not drops or drops[-1].head - drops[-1].length >= self.gap[x]:
+                drops.append(self.new_drop(x))
+                self.gap[x] = random.randint(0, rows)
+                if random.random() < 0.3:
+                    self.wait[x] = random.randrange(rows * 2)
+
+            for drop in list(drops):
+                drop.timer += 1
+                if drop.timer < drop.speed:
+                    continue
+                drop.timer = 0
+                drop.head += 1
+                y = drop.head
+                if 0 <= y < rows:
+                    self.chars[x][y] = self.random_char()
+                    self.colour[x][y] = self.cell_colour()
+                    self.bold[x][y] = self.cell_bold()
+                    if revealing and (x, y) in self.msg_cells:
+                        self.locked[x, y] = self.msg_cells[x, y]
+                for d in self.boundaries(drop.length):
+                    yy = drop.head - d
+                    if 0 <= yy < rows:
+                        out.append(self.render(x, yy))
+                if drop.head - drop.length >= rows - 1:
+                    drops.remove(drop)
+
+        if self.opts.flicker:
+            for _ in range(max(1, self.cols // 6)):
+                x = random.randrange(self.cols)
+                if not self.drops[x]:
+                    continue
+                drop = random.choice(self.drops[x])
+                y = drop.head - random.randint(1, max(1, drop.length - 1))
+                if 0 <= y < rows and (x, y) not in self.locked:
+                    self.chars[x][y] = self.random_char()
+                    out.append(self.render(x, y))
+        return out
+
+
+# --------------------------------------------------------------------------
+# Terminal handling
+# --------------------------------------------------------------------------
+
+def terminal_size(fd):
+    try:
+        size = os.get_terminal_size(fd)
+        if size.columns > 0 and size.lines > 0:
+            return size.columns, size.lines
+    except OSError:
+        pass
+    return 80, 24
+
+
+def write(fd, text):
+    data = memoryview(text.encode("utf-8"))
+    while data:
+        n = os.write(fd, data)
+        data = data[n:]
+
+
+def frame_delay(level):
+    return 0.008 + level * 0.012   # 0 -> 8ms, 4 -> 56ms, 10 -> 128ms
+
+
+def handle_keys(data, state):
+    """Apply key presses in normal mode. Returns False when it's time to quit."""
+    i = 0
+    while i < len(data):
+        b = data[i]
+        if b == 0x1b:                       # skip escape sequences (arrows, F-keys, alt+key)
+            if i + 1 < len(data) and data[i + 1] in b"[O":
+                j = i + 2
+                if data[i + 1] == ord("["):
+                    while j < len(data) and not 0x40 <= data[j] <= 0x7e:
+                        j += 1
+                i = j + 1
+            else:
+                i += 2
+            continue
+        if b in b"qQ\x03":                  # q, or Ctrl-C (raw mode delivers it as a byte)
+            return False
+        if 0x30 <= b <= 0x39:
+            state["delay"] = b - 0x30
+        i += 1
+    return True
+
+
+def run(opts):
+    fd_in, fd_out = sys.stdin.fileno(), sys.stdout.fileno()
+    if not (os.isatty(fd_in) and os.isatty(fd_out)):
+        print("ccmatrix: must be run in a terminal", file=sys.stderr)
+        return 1
+
+    resized = False
+
+    def on_winch(signum, frame):
+        nonlocal resized
+        resized = True
+
+    def on_exit_signal(signum, frame):
+        raise SystemExit(0)
+
+    signal.signal(signal.SIGWINCH, on_winch)
+    for sig in (signal.SIGTERM, signal.SIGHUP):
+        signal.signal(sig, on_exit_signal)
+
+    saved = termios.tcgetattr(fd_in)
+    mouse_on = f"{ESC}[?1000h{ESC}[?1003h{ESC}[?1006h" if opts.screensaver else ""
+    mouse_off = f"{ESC}[?1006l{ESC}[?1003l{ESC}[?1000l" if opts.screensaver else ""
+    try:
+        tty.setraw(fd_in)
+        # Alternate screen, hide cursor, no autowrap, clear.
+        write(fd_out, f"{ESC}[?1049h{ESC}[?25l{ESC}[?7l{mouse_on}{ESC}[0m{ESC}[2J")
+        matrix = Matrix(opts, terminal_size(fd_out))
+        state = {"delay": opts.delay}
+        next_frame = time.monotonic()
+        while True:
+            if resized:
+                resized = False
+                matrix.resize(*terminal_size(fd_out))
+                write(fd_out, "".join(matrix.redraw_all()))
+
+            timeout = max(0.0, next_frame - time.monotonic())
+            ready, _, _ = select.select([fd_in], [], [], timeout)
+            if ready:
+                data = os.read(fd_in, 1024)
+                if opts.screensaver and data:
+                    return 0
+                before = state["delay"]
+                if not handle_keys(data, state):
+                    return 0
+                if state["delay"] < before:   # speeding up takes effect now
+                    next_frame = min(next_frame, time.monotonic() + frame_delay(state["delay"]))
+
+            now = time.monotonic()
+            if now >= next_frame:
+                out = matrix.tick(now)
+                if out:
+                    write(fd_out, "".join(out))
+                next_frame = now + frame_delay(state["delay"])
+    finally:
+        write(fd_out, f"{ESC}[0m{mouse_off}{ESC}[2J{ESC}[?7h{ESC}[?25h{ESC}[?1049l")
+        termios.tcsetattr(fd_in, termios.TCSAFLUSH, saved)
+
+
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    opts = parse_args(read_config(CONFIG_PATH) + list(argv))
+    try:
+        return run(opts)
+    except KeyboardInterrupt:
+        return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
